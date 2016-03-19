@@ -8,8 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using WebAPIAngularJS.Models;
 
-namespace WebAPIAngularJS.Models
+namespace WebAPIAngularJS.Controllers
 {
     public class StudentController : ApiController
     {
@@ -20,12 +21,16 @@ namespace WebAPIAngularJS.Models
         //{
         //    return db.Students;
         //}
+
         public IEnumerable<Student> GetStudents()
         {
             List<Student> stuList = new List<Student>();
-            Student stuModel = new Student();
-            foreach(var stu in db.Students)
+
+            Student stuModel = new Student(); 
+            
+            foreach (var stu in db.Students)
             {
+                //stuModel = new Student();
                 stuModel.EnrollmentDate = stu.EnrollmentDate;
                 stuModel.Enrollments = stu.Enrollments;
                 stuModel.FirstName = stu.FirstName;
@@ -34,41 +39,40 @@ namespace WebAPIAngularJS.Models
                 stuModel.StudentID = stu.StudentID;
 
                 stuList.Add(stuModel);
+
+                //stuModel = null;
             }
 
             return stuList.AsEnumerable();
         }
 
         // GET api/Student/5
-        /*[ResponseType(typeof(Student))]
-        public IHttpActionResult GetStudent(int id)
-        {
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(student);
-        }*/
-
         //[ResponseType(typeof(Student))]
+        //public IHttpActionResult GetStudent(int id)
+        //{
+        //    Student student = db.Students.Find(id);
+        //    if (student == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(student);
+        //}
+
         public Student GetStudent(int id)
         {
-            //Student student = new Student();
-            //var stu = db.Students.Find(id);
-            //student.EnrollmentDate = stu.EnrollmentDate;
-            //student.Enrollments = stu.Enrollments;
-            //student.FirstName = stu.FirstName;
-            //student.LastName = stu.LastName;
-            //student.MiddleName = stu.MiddleName;
-            //student.StudentID = stu.StudentID;
-                        
-            //return student;
+            Student student = new Student();
+            var stu = db.Students.Find(id);
 
-            return GetStudents().Single(s => s.StudentID.Equals(id));
+            student.EnrollmentDate = stu.EnrollmentDate;
+            student.Enrollments = stu.Enrollments;
+            student.FirstName = stu.FirstName;
+            student.LastName = stu.LastName;
+            student.MiddleName = stu.MiddleName;
+            student.StudentID = stu.StudentID;
+
+            return student;
         }
-        
 
         // PUT api/Student/5
         public IHttpActionResult PutStudent(int id, Student student)
