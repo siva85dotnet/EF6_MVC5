@@ -17,62 +17,50 @@ namespace WebAPIAngularJS.Controllers
         private SRK_DBEntities db = new SRK_DBEntities();
 
         // GET api/Student
-        //public IQueryable<Student> GetStudents()
-        //{
-        //    return db.Students;
-        //}
-
-        public IEnumerable<Student> GetStudents()
+        public IQueryable<Student> GetStudents()
         {
-            List<Student> stuList = new List<Student>();
-
-            Student stuModel = new Student(); 
-            
-            foreach (var stu in db.Students)
-            {
-                //stuModel = new Student();
-                stuModel.EnrollmentDate = stu.EnrollmentDate;
-                stuModel.Enrollments = stu.Enrollments;
-                stuModel.FirstName = stu.FirstName;
-                stuModel.LastName = stu.LastName;
-                stuModel.MiddleName = stu.MiddleName;
-                stuModel.StudentID = stu.StudentID;
-
-                stuList.Add(stuModel);
-
-                //stuModel = null;
-            }
-
-            return stuList.AsEnumerable();
+            return db.Students;
         }
 
-        // GET api/Student/5
-        //[ResponseType(typeof(Student))]
-        //public IHttpActionResult GetStudent(int id)
+        //public IEnumerable<Student> GetStudents()
         //{
-        //    Student student = db.Students.Find(id);
-        //    if (student == null)
+        //    List<Student> stuList = new List<Student>();
+
+        //    foreach (var stu in db.Students)
         //    {
-        //        return NotFound();
+        //        stuList.Add(new Student { EnrollmentDate = stu.EnrollmentDate, Enrollments = stu.Enrollments, FirstName = stu.FirstName, LastName = stu.LastName, MiddleName = stu.MiddleName, StudentID = stu.StudentID });
         //    }
 
-        //    return Ok(student);
+        //    return stuList.AsEnumerable();
         //}
 
-        public Student GetStudent(int id)
+        // GET api/Student/5
+        [ResponseType(typeof(Student))]
+        public IHttpActionResult GetStudent(int id)
         {
-            Student student = new Student();
-            var stu = db.Students.Find(id);
+            Student student = db.Students.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
 
-            student.EnrollmentDate = stu.EnrollmentDate;
-            student.Enrollments = stu.Enrollments;
-            student.FirstName = stu.FirstName;
-            student.LastName = stu.LastName;
-            student.MiddleName = stu.MiddleName;
-            student.StudentID = stu.StudentID;
-
-            return student;
+            return Ok(student);
         }
+
+        //public Student GetStudent(int id)
+        //{
+        //    Student student = new Student();
+        //    var stu = db.Students.Find(id);
+
+        //    student.EnrollmentDate = stu.EnrollmentDate;
+        //    student.Enrollments = stu.Enrollments;
+        //    student.FirstName = stu.FirstName;
+        //    student.LastName = stu.LastName;
+        //    student.MiddleName = stu.MiddleName;
+        //    student.StudentID = stu.StudentID;
+
+        //    return student;
+        //}
 
         // PUT api/Student/5
         public IHttpActionResult PutStudent(int id, Student student)

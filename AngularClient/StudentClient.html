@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="student">
+<head>
+    <title>Student Client</title>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/Student.js"></script>
+</head>
+<body ng-controller="studentController">
+    <table cellpadding="2" cellspacing="2" border="1">
+        <tr>
+            <th>StudentID</th>
+            <th>FirstName</th>
+            <th>MiddleName</th>
+            <th>LastName</th>
+            <th>EnrollmentDate</th>
+            <th>Enrollments</th>
+        </tr>
+        <tr ng-repeat="student in result">
+            <td>{{student.StudentID}}</td>
+            <td>{{student.FirstName}}</td>
+            <td>{{student.MiddleName}}</td>
+            <td>{{student.LastName}}</td>
+            <td>{{student.EnrollmentDate}}</td>
+            <td>
+                <table>
+                    <tr ng-repeat="enroll in student.Enrollments">
+                        <td>
+                            {{enroll.Course.Title}} <br/>
+                            {{Hi}}
+                        </td>
+                    </tr>
+            </table>
+        </tr>
+    </table>
+</body>
+</html>

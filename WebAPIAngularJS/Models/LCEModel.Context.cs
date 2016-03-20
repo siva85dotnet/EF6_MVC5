@@ -18,6 +18,8 @@ namespace WebAPIAngularJS.Models
         public SRK_DBEntities()
             : base("name=SRK_DBEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
