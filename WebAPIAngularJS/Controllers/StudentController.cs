@@ -19,7 +19,7 @@ namespace WebAPIAngularJS.Controllers
         // GET api/Student
         public IQueryable<Student> GetStudents()
         {
-            return db.Students;
+            return db.Students.Include(e => e.Enrollments);
         }
 
         //public IEnumerable<Student> GetStudents()
